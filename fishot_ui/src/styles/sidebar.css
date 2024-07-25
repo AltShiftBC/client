@@ -12,6 +12,7 @@
     align-items: center;
     gap: 10px;
     color: #4E60FF;
+    cursor: pointer;
 }
 #fishot{
     font-size:x-large;
