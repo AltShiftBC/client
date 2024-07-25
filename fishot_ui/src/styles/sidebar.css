@@ -1,0 +1,52 @@
+.sidebar{
+    width: 25%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.one{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #4E60FF;
+}
+#fishot{
+    font-size:x-large;
+    font-weight:600;
+}
+.icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+}
+#home, #control, #video, #remote, #analytics, #settings{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    width: 250px;
+    cursor: pointer;
+    padding-left: 8%;
+    border-radius: 5px;
+    font-weight: 400;
+}
+#home:hover, #control:hover, #video:hover, #remote:hover, #analytics:hover, #settings:hover{
+    background-color: #4E60FF4A;
+    color: #4E60FF;
+    font-weight: 500;
+}
+#control>img{
+    color: #4E60FF;
+}
+#line{
+    width: 100%;
+}
+
+icon{
+    font-size: 30px;
+}
