@@ -1,12 +1,6 @@
 import React from "react";
 import "../styles/sidebar.css"
 import logo from "../assets/logo.png"
-import home from "../assets/icons/home.png"
-import control from "../assets/icons/Control.png"
-import analytics from "../assets/icons/analytics.png"
-import remote from "../assets/icons/Remote.png"
-import settings from "../assets/icons/Settings.png"
-import video from "../assets/icons/video.png"
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 

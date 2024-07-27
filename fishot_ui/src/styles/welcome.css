@@ -1,0 +1,30 @@
+.welcome-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.welcome-logo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-name{
+    font-size: xx-large;
+    font-weight: 700;
+    color: #4E60FF;
+}
+.welcome-button{
+    padding: 10px;
+    width: 120px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #4E60FF;
+}
+.welcome-button:hover{
+    background: #4E60FF4A;
+}

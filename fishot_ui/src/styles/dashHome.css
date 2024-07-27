@@ -2,4 +2,7 @@
     width: 75%;
     height: 100%;
     background-color: #E4E7FF;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
 }
