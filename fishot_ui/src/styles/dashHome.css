@@ -1,8 +1,9 @@
 .dashHome{
-    width: 75%;
-    height: 100%;
-    background-color: #E4E7FF;
+    position: absolute;
+    right: 0px;
+    width: 80%;
     display: flex;
-    justify-content: start;
     flex-direction: column;
+    gap: 20px;
+    padding:0 0 10px;
 }

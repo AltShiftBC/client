@@ -1,0 +1,92 @@
+.hometop-div{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+}
+.sideOne{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 20px;
+}
+
+.status-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+#status-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #fff;
+    padding:0 30px;
+    border-radius: 5px;
+}
+#icon{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.status-icon{
+    background: #05FF0021;
+    border-radius:50%;
+    color: #04D700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.sideTwo{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.profile-div, .statistic-div{
+    width: 200px;
+    height: 220px;
+    border-radius: 7.5px;
+    background-color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.profile-pic-id{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.profile-set{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.statistic-name{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.statistic-graph{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    gap: 10px;
+}
+
+#statictic-main-graph{
+    width: 90%;
+    display: flex;
+}

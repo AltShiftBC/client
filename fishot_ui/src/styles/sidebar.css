@@ -1,7 +1,8 @@
 .sidebar{
-    width: 25%;
+    width: 20%;
     height: 100vh;
     display: flex;
+    position: fixed;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -31,11 +32,12 @@
     justify-content: start;
     align-items: center;
     gap: 10px;
-    width: 250px;
+    width: 200px;
     cursor: pointer;
     padding-left: 8%;
     border-radius: 5px;
     font-weight: 400;
+    color: #343434;
 }
 #home:hover, #control:hover, #video:hover, #remote:hover, #analytics:hover, #settings:hover{
     background-color: #4E60FF4A;

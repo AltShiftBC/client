@@ -1,0 +1,29 @@
+.homebottom-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.homebottom-table{
+    background: #fff;
+    width: 91.5%;
+    border-radius: 5px;
+    padding: 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+#head, #body1{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+button{
+    color: #0015D3;
+    background: #4E60FF40;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
