@@ -6,30 +6,72 @@ import feed3 from "../assets/icons/feed3.svg";
 import feed4 from "../assets/icons/feed4.svg";
 import "../styles/video.css";
 import { Icon } from "@iconify/react";
-import sad_video_feed from "../assets/sad-video-feed.mp4";
 
 const VideoDashBody = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const [recordingStartTime, setRecordingStartTime] = useState(null);
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const [mediaRecorder, setMediaRecorder] = useState(null);
+    const [recordedChunks, setRecordedChunks] = useState([]);
     const videoRef = useRef(null);
 
     useEffect(() => {
-        const videoElement = videoRef.current;
-        const handleVideoEnd = () => {
-            videoElement.currentTime = 0;
-            videoElement.play();
+        const startCamera = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoRef.current.srcObject = stream;
+                
+                const recorder = new MediaRecorder(stream);
+                setMediaRecorder(recorder);
+
+                recorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        setRecordedChunks(prev => [...prev, event.data]);
+                    }
+                };
+
+                recorder.onstart = () => {
+                    setRecordingStartTime(Date.now());
+                };
+
+                recorder.onstop = () => {
+                    setRecordingStartTime(null);
+                    setElapsedTime(0);
+                };
+            } catch (error) {
+                console.error("Error accessing camera: ", error);
+            }
         };
-        videoElement.addEventListener("ended", handleVideoEnd);
+
+        startCamera();
+
         return () => {
-            videoElement.removeEventListener("ended", handleVideoEnd);
+            if (videoRef.current && videoRef.current.srcObject) {
+                videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+            }
         };
     }, []);
+
+    useEffect(() => {
+        let interval;
+        if (isPlaying && recordingStartTime) {
+            interval = setInterval(() => {
+                setElapsedTime(Math.floor((Date.now() - recordingStartTime) / 1000));
+            }, 1000);
+        } else if (!isPlaying) {
+            clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+    }, [isPlaying, recordingStartTime]);
 
     const handlePlayPause = () => {
         if (isPlaying) {
             videoRef.current.pause();
+            if (mediaRecorder) mediaRecorder.stop();
         } else {
             videoRef.current.play();
+            if (mediaRecorder) mediaRecorder.start();
         }
         setIsPlaying(!isPlaying);
     };
@@ -44,11 +86,56 @@ const VideoDashBody = () => {
         setCurrentTime(videoRef.current.currentTime);
     };
 
+    const trimVideo = (chunks, trimTime) => {
+        return new Promise((resolve, reject) => {
+            const blob = new Blob(chunks, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            const videoElement = document.createElement('video');
+            videoElement.src = url;
+            videoElement.preload = 'metadata';
+            videoElement.onloadedmetadata = () => {
+                const duration = videoElement.duration;
+                const startTime = 0;
+                const endTime = Math.min(trimTime, duration);
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const stream = canvas.captureStream();
+                const recorder = new MediaRecorder(stream);
+
+                const trimmedChunks = [];
+                recorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        trimmedChunks.push(event.data);
+                    }
+                };
+
+                recorder.start();
+                videoElement.currentTime = startTime;
+
+                videoElement.ontimeupdate = () => {
+                    if (videoElement.currentTime >= endTime) {
+                        videoElement.pause();
+                        recorder.stop();
+                    }
+                    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                };
+            };
+
+            videoElement.onerror = (error) => {
+                reject(error);
+            };
+        });
+    };
+
     const handleDownload = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = 'sad-video-feed.mp4';
-        link.href = sad_video_feed;
+        link.href = url;
+        link.download = 'recorded-video.webm'; // Use .webm or another extension matching the Blob type
         link.click();
+        URL.revokeObjectURL(url);
     };
 
     const [isToggled, setIsToggled] = useState({ open: false, close: false });
@@ -57,13 +144,19 @@ const VideoDashBody = () => {
         setIsToggled((prev) => ({ ...prev, [type]: !prev[type] }));
     };
 
+    const formatTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes}:${secs.toString().padStart(2, '0')}`;
+    };
+
     return (
         <div className="video-dash">
             <div className="video-control">
                 <video 
                     ref={videoRef} 
                     width="900" 
-                    src={sad_video_feed} 
+                    autoPlay 
                     onTimeUpdate={() => setCurrentTime(videoRef.current.currentTime)}
                 />
                 <div>
@@ -118,6 +211,9 @@ const VideoDashBody = () => {
                             onClick={handleDownload} 
                         />
                     </div>
+                </div>
+                <div className="record-timer">
+                    <p style={{fontSize:"12.5px", color:"#4E60FF"}}>Elapsed Time: {formatTime(elapsedTime)}</p>
                 </div>
             </div>
             <div className="sensor-options">
