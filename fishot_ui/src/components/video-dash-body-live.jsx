@@ -6,30 +6,49 @@ import feed3 from "../assets/icons/feed3.svg";
 import feed4 from "../assets/icons/feed4.svg";
 import "../styles/video.css";
 import { Icon } from "@iconify/react";
-import sad_video_feed from "../assets/sad-video-feed.mp4";
 
-const VideoDashBody = () => {
+const VideoDashBodyLive = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const [mediaRecorder, setMediaRecorder] = useState(null);
+    const [recordedChunks, setRecordedChunks] = useState([]);
     const videoRef = useRef(null);
 
     useEffect(() => {
-        const videoElement = videoRef.current;
-        const handleVideoEnd = () => {
-            videoElement.currentTime = 0;
-            videoElement.play();
+        const startCamera = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoRef.current.srcObject = stream;
+                
+                const recorder = new MediaRecorder(stream);
+                setMediaRecorder(recorder);
+
+                recorder.ondataavailable = event => {
+                    if (event.data.size > 0) {
+                        setRecordedChunks(prev => [...prev, event.data]);
+                    }
+                };
+            } catch (error) {
+                console.error("Error accessing camera: ", error);
+            }
         };
-        videoElement.addEventListener("ended", handleVideoEnd);
+
+        startCamera();
+
         return () => {
-            videoElement.removeEventListener("ended", handleVideoEnd);
+            if (videoRef.current && videoRef.current.srcObject) {
+                videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+            }
         };
     }, []);
 
     const handlePlayPause = () => {
         if (isPlaying) {
             videoRef.current.pause();
+            if (mediaRecorder) mediaRecorder.stop();
         } else {
             videoRef.current.play();
+            if (mediaRecorder) mediaRecorder.start();
         }
         setIsPlaying(!isPlaying);
     };
@@ -45,10 +64,13 @@ const VideoDashBody = () => {
     };
 
     const handleDownload = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+        const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = 'sad-video-feed.mp4';
-        link.href = sad_video_feed;
+        link.href = url;
+        link.download = 'recorded-video.mp4';
         link.click();
+        URL.revokeObjectURL(url);
     };
 
     const [isToggled, setIsToggled] = useState({ open: false, close: false });
@@ -63,7 +85,7 @@ const VideoDashBody = () => {
                 <video 
                     ref={videoRef} 
                     width="900" 
-                    src={sad_video_feed} 
+                    autoPlay 
                     onTimeUpdate={() => setCurrentTime(videoRef.current.currentTime)}
                 />
                 <div>
@@ -151,4 +173,4 @@ const VideoDashBody = () => {
     );
 }
 
-export default VideoDashBody;
+export default VideoDashBodyLive;
