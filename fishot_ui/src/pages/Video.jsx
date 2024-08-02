@@ -1,9 +1,13 @@
 import React from "react";
+import Sidebar from "../components/sidebar";
+import VideoDash from "../components/video-dash";
+
 
 const Video=()=>{
     return(
         <div>
-            Video
+            <Sidebar />
+            <VideoDash />
         </div>
     )
 }

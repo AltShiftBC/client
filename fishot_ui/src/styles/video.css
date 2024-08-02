@@ -1,0 +1,141 @@
+.video-container{
+    position: relative;
+    width: 80%;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 0 20px;
+}
+.video-dash{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.video-control, .sensor-options{
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+#feed1, #feed2, #feed3, #feed4{
+    position: absolute;
+}
+#feed1{
+    top: 140px;
+    left: 100px;
+}
+#feed2{
+    top: 140px;
+    right: 100px;
+}
+#feed3{
+    top: 565px;
+    right: 100px;
+}
+#feed4{
+    top: 565px;
+    left: 100px;
+}
+.video-live{
+    display: flex;
+    color: #FF0000;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-weight: bolder;
+    gap: 10px;
+    position: absolute;
+    top: 140px;
+    right: 120px;
+}
+.record-on{
+    width: 20px;
+    height: 20px;
+    background-color: #FF0000;
+    border-radius: 50px;
+}
+.video-navigate{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.live-noti{
+    display: flex;
+    color: #FF0000;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    gap: 10px;
+}
+.live-on{
+    width: 15px;
+    height: 15px;
+    background-color: #FF0000;
+    border-radius: 50px;
+}
+.control-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #4E60FF;
+}
+.download-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4E60FF;
+}
+#video-icon:hover{
+    width: 20px;
+}
+.sensor-options{
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 84.5%;
+}
+.icon-detection, .icon-sensors{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 10px;
+}
+.icon-open-circle, .icon-close-circle{
+    width: 50px;
+    height: 17.5px;
+    border-width: 20px;
+    border: #4E60FF;
+    border-style: solid;
+    border-radius: 20px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+}
+.icon-close-arrow, .icon-open-arrow{
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.icon-open-circle{
+    background-color: #4E60FF;
+}
+.icon-close-circle{
+    background-color: #fff;
+    justify-content: end;
+}
+.icon-open-arrow{
+    background-color: #fff;
+}
+.icon-close-arrow{
+    background-color: #4E60FF;
+}
