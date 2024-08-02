@@ -133,7 +133,7 @@ const VideoDashBody = () => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'recorded-video.webm'; // Use .webm or another extension matching the Blob type
+        link.download = 'recorded-video.webm';
         link.click();
         URL.revokeObjectURL(url);
     };
