@@ -23,7 +23,8 @@
     border-radius: 10px;
     width: 25%;
     display: flex;
-    background-color: #fff;
+    flex-direction: column;
+    gap: 40px;
 }
 .panel-mode, .panel-speed, .pathway{
     border-radius: 10px;
@@ -131,4 +132,71 @@
 }
 .position-div>p{
     color: #0011A7;
+}
+
+.panel-status, .panel-emergencies{
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+}
+.panel-status-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.head-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.online-icon-div{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background-color: #05FF0021;
+}
+.panel-status-body{
+    display: flex;
+    flex-direction: column;
+}
+.panel-status-sub{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.panel-emergencies{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+}
+.panel-emergencies>#head{
+    color: #FF4444;
+    font-size: large;
+    font-weight: 650;
+}
+.panel-emergencies>div{
+    width: 80%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: #FF4141;
+    color: #fff;
+    font-size: medium;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 0 20px;
+    gap: 5px;
+    cursor: pointer;
+}
+.panel-emergencies>div:hover{
+    padding: 0 19.5px;
 }

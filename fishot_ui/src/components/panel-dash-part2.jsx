@@ -4,6 +4,50 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import map from "../assets/map.png"
 
 const PanelDashPart2 = () => {
+    const statusItems = [
+        {
+            icon: 'gg:battery',
+            iconColor: '#FF4848',
+            iconBackground: '#FF6F6F21',
+            label: 'Battery',
+            value: '78%',
+        },
+        {
+            icon: 'iconoir:trash-solid',
+            iconColor: '#411900',
+            iconBackground: '#A4540021',
+            label: 'Weight',
+            value: '7.6Kg',
+        },
+        {
+            icon: 'lets-icons:pressure',
+            iconColor: '#F5B100',
+            iconBackground: '#FFB8003B',
+            label: 'Pressure',
+            value: '5atm',
+        },
+        {
+            icon: 'ic:round-height',
+            iconColor: '#4E60FF',
+            iconBackground: '#4E60FF3B',
+            label: 'Depth',
+            value: '40m',
+        },
+        {
+            icon: 'ion:location-outline',
+            iconColor: '#04D700',
+            iconBackground: '#04D7002E',
+            label: 'Location',
+            value: 'Lake kivu',
+        },
+        {
+            icon: 'ic:round-sensors',
+            iconColor: '#8F00FF',
+            iconBackground: '#8F00FF26',
+            label: 'Sensors',
+            value: 'Ok',
+        },
+    ];
     return (
         <div className="dash-part2-div">
             <div className="part2-side-one">
@@ -40,25 +84,71 @@ const PanelDashPart2 = () => {
                             <div className="position-div">
                                 <p>Initial position:</p>
                                 <div className="position-exact">
-                                    <Icon icon="mdi:location-on-outline" style={{fontSize:"x-large"}}/> &nbsp; |&nbsp; Rusizi
+                                    <Icon icon="mdi:location-on-outline" style={{ fontSize: "x-large" }} /> &nbsp; |&nbsp; Rusizi
                                 </div>
                             </div>
                             <div className="position-div">
                                 <p>Return at:</p>
                                 <div className="return-div">
                                     <div className="position-exact">
-                                        <Icon icon="mdi:location-on-outline" style={{fontSize:"x-large"}}/> &nbsp;|&nbsp; Idjwi island
+                                        <Icon icon="mdi:location-on-outline" style={{ fontSize: "x-large" }} /> &nbsp;|&nbsp; Idjwi island
                                     </div>
                                     <button>Set new</button>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="part2-side-two">
-                part 2
+                <div className="panel-status">
+                    <div className="panel-status-head">
+                        <div className="head-icons"><Icon icon="pajamas:status" style={{ fontSize: "20px" }} /><p style={{ color: "#343434", fontSize: "20px" }}>Status</p></div>
+                        <div className="head-icons"><div className="online-icon-div"><Icon icon="mdi:internet" style={{ fontSize: "17.5px", color: "#04D700" }} /></div><p style={{ color: "#818181", fontSize: "15px" }}>Online</p></div>
+                    </div>
+                    <div className="panel-status-body">
+                        {statusItems.map((item, index) => (
+                            <div
+                                key={index}
+                                className="panel-status-sub"
+                                style={{
+                                    color: item.value.toLowerCase() === 'ok' ? '#04D700' : undefined,
+                                }}
+                            >
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '5px' }}>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            width: '20px',
+                                            height: '20px',
+                                            backgroundColor: item.iconBackground,
+                                            color: item.iconColor,
+                                            borderRadius: '50px',
+                                            padding: '7.5px',
+                                        }}
+                                    >
+                                        <Icon icon={item.icon} />
+                                    </div>
+                                    <p style={{ color: '#000000', fontWeight: '600', fontSize: '17.5px' }}>{item.label}</p>
+                                </div>
+                                <div style={{ color: item.value.toLowerCase() === 'ok' ? '#04D700' : '#818181' }}>
+                                    {item.value}
+                                </div>
+                                <Icon icon="ep:arrow-right-bold" style={{ color: '#4E60FF' }} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="panel-emergencies">
+                    <p id="head">Emergency</p>
+                    <div><Icon icon="bi:arrow-return-right" style={{fontWeight:"700", fontSize:"20px"}}/><p>Return</p></div>
+                    <div><Icon icon="ic:outline-eject" style={{fontWeight:"700", fontSize:"20px"}}/><p>Eject package</p></div>
+                    <div><Icon icon="fa6-solid:power-off" style={{fontWeight:"700", fontSize:"20px"}}/><p>Shutdown</p></div>
+                </div>
+
             </div>
         </div>
     )
