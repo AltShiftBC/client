@@ -5,14 +5,16 @@ import feed1 from "../assets/icons/feed1.svg";
 import feed2 from "../assets/icons/feed2.svg";
 import feed3 from "../assets/icons/feed3.svg";
 import feed4 from "../assets/icons/feed4.svg";
-import "../styles/video.css";
-import { Icon } from "@iconify/react";
+// import { Icon } from "@iconify/react";
+import '../styles/RemoteControl.css';
+import '../styles/video.css';
 
-const VideoDashBody = () => {
+const RemoteControl = () => {
+    
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [recordingStartTime, setRecordingStartTime] = useState(null);
-    const [elapsedTime, setElapsedTime] = useState(0);
+    // const [elapsedTime, setElapsedTime] = useState(0);
     const [mediaRecorder, setMediaRecorder] = useState(null);
     const [recordedChunks, setRecordedChunks] = useState([]);
     const videoRef = useRef(null);
@@ -36,10 +38,10 @@ const VideoDashBody = () => {
                     setRecordingStartTime(Date.now());
                 };
 
-                recorder.onstop = () => {
-                    setRecordingStartTime(null);
-                    setElapsedTime(0);
-                };
+                // recorder.onstop = () => {
+                //     setRecordingStartTime(null);
+                //     setElapsedTime(0);
+                // };
             } catch (error) {
                 console.error("Error accessing camera: ", error);
             }
@@ -150,9 +152,9 @@ const VideoDashBody = () => {
         const secs = seconds % 60;
         return `${minutes}:${secs.toString().padStart(2, '0')}`;
     };
-
     return (
-        <div className="video-dash">
+        <div className="remote-control"> 
+            <div className="content">
             <div className="video-control">
                 <video 
                     ref={videoRef} 
@@ -213,39 +215,27 @@ const VideoDashBody = () => {
                         />
                     </div>
                 </div>
-                <div className="record-timer">
-                    <p style={{fontSize:"12.5px", color:"#4E60FF"}}>Elapsed Time: {formatTime(elapsedTime)}</p>
                 </div>
+                <div className="status-div">
+                <div id="status-container">
+                        <div className="status-icon"><Icon icon="mdi:internet" id="
+                    icon"/></div>
+                        <div id="status-desc"><p style={{ fontWeight: "bold" }}>Status</p><p style={{ color: "#818181" }}>Online</p></div>
+                    </div>
+                    <div id="status-container">
+                        <div className="status-icon" style={{ backgroundColor: "#A4540021" }}><Icon icon="iconoir:trash-solid" style={{ color: "#411900" }} id="
+                    icon"/></div>
+                        <div id="status-desc"><p style={{ fontWeight: "bold" }}>Weight</p><p style={{ color: "#818181" }}>7.6kg</p></div>
+                    </div>
+                    <div id="status-container">
+                        <div className="status-icon" style={{ backgroundColor: "#4E60FF4D" }}><Icon icon="ic:baseline-mode-standby" style={{ color: "#4E60FF" }} id="
+                    icon"/></div>
+                        <div id="status-desc"><p style={{ fontWeight: "bold" }}>Mode</p><p style={{ color: "#818181" }}>Auto</p></div>
+                    </div>
             </div>
-            <div className="sensor-options">
-                <p style={{ color: "#4E60FF", fontWeight: "600" }}>Options</p>
-                <div style={{ display: "flex", justifyContent: "start", alignItems: "center", gap: "30px" }}>
-                    <div className="icon-detection">
-                        <div className="icon-open">
-                            <div className={isToggled.open ? "icon-open-circle" : "icon-close-circle"}>
-                                <div
-                                    className={isToggled.open ? "icon-open-arrow" : "icon-close-arrow"}
-                                    onClick={() => handleToggle('open')}
-                                ></div>
-                            </div>
-                        </div>
-                        <p style={{ color: "#4E60FF", fontWeight: "400", fontSize: "12.5px" }}>AI detection</p>
-                    </div>
-                    <div className="icon-sensors">
-                        <div className="icon-close">
-                            <div className={isToggled.close ? "icon-open-circle" : "icon-close-circle"}>
-                                <div
-                                    className={isToggled.close ? "icon-open-arrow" : "icon-close-arrow"}
-                                    onClick={() => handleToggle('close')}
-                                ></div>
-                            </div>
-                        </div>
-                        <p style={{ color: "#4E60FF", fontWeight: "400", fontSize: "12.5px" }}>Thermal sensors</p>
-                    </div>
-                </div>
             </div>
         </div>
     );
-}
+};
 
-export default VideoDashBody;
+export default RemoteControl;

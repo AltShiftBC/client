@@ -1,0 +1,15 @@
+.remote-control {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.status-div {
+    margin-top: 20px;
+    gap: 20px;
+
+}
