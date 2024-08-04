@@ -39,7 +39,6 @@ const RemoteControl = () => {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 videoRef.current.srcObject = stream;
-
                 const recorder = new MediaRecorder(stream);
                 setMediaRecorder(recorder);
 
