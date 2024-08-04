@@ -16,6 +16,8 @@
 }
 .video-control, .sensor-options{
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -63,6 +65,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    width: 100%;
 }
 .live-noti{
     display: flex;

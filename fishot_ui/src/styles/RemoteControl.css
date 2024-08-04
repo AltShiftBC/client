@@ -1,15 +1,43 @@
-.remote-control {
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-}
 .content {
     display: flex;
     flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 10px 40px;
 }
 
 .status-div {
     margin-top: 20px;
     gap: 20px;
 
+}
+.emergency{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:84.3%;
+    background-color: #343434E5;
+    padding: 0 20px;
+    position: absolute;
+    top: 137.5px;
+    right: 69px;
+}
+.emergency-icons{
+    width: 7.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#icon:hover{
+    width: 20%;
+}
+#icon-arrow-back:hover{
+    width: 20px;
+}
+.emergency>button{
+    background: #FF2828;
+    color: #fff;
+    font-weight: 600;
+    font-size: small;
+    border-radius: 0;
 }
