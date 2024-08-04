@@ -1,11 +1,63 @@
-import React from "react"
-import "../styles/homeTop.css"
-import map from "../assets/map.png"
-import { Icon } from "@iconify/react/dist/iconify.js"
-import profile from "../assets/profile.png"
-import graph from "../assets/graph.png"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect, useCallback } from "react";
+import "../styles/homeTop.css";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import profile from "../assets/profile.png";
+import graph from "../assets/graph.png";
+import { Link } from "react-router-dom";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
+
+
+const Map = () => {
+    const { isLoaded, loadError } = useJsApiLoader({
+      id: 'google-map-script',
+      googleMapsApiKey: "AIzaSyC9DwiMV_Ilr99dLFNvqc1YVJSC8wW0Mpw"
+    });
+  
+    const [map, setMap] = useState(null);
+  
+    const mapContainerStyle = {
+      width: '10%',
+      height: '40px' // Set a fixed height for testing
+    };
+  
+    const center = {
+        // Here we will get this coordinates from the user input i think
+      lat: -1.939826787816454,
+      lng: 30.0445426438232
+    };
+  
+    const onLoad = React.useCallback(function callback(map) {
+      console.log('Map has loaded successfully');
+      setMap(map);
+    }, []);
+  
+    const onUnmount = React.useCallback(function callback(map) {
+      console.log('Map has unmounted');
+      setMap(null);
+    }, []);
+  
+    useEffect(() => {
+      if (loadError) {
+        console.error("Error loading maps", loadError);
+      }
+    }, [loadError]);
+  
+    if (loadError) return <div>Error loading maps</div>;
+    if (!isLoaded) return <div>Loading maps</div>;
+  
+    return (
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        center={center}
+        zoom={10}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        { /* Child components, such as markers, info windows, etc. */ }
+      </GoogleMap>
+    );
+  };
 const HomeTop = () => {
     return (
         <div className="hometop-div">
@@ -32,8 +84,8 @@ const HomeTop = () => {
                         <div id="status-desc"><p style={{ fontWeight: "bold" }}>Mode</p><p style={{ color: "#818181" }}>Auto</p></div>
                     </div>
                 </div>
-                <div className="map">
-                    <img src={map} alt=""/>
+                <div className="map" style={{ height: '40px' }}>
+                    <Map/>
                 </div>
             </div>
             <div className="sideTwo">
