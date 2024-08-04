@@ -90,3 +90,11 @@
     width: 90%;
     display: flex;
 }
+.map-div{
+    background-color: red;
+    width: 100%;
+    display: flex;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+}
