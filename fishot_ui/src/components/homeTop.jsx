@@ -53,6 +53,7 @@ const Map = () => {
         zoom={10}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        id="map-map"
       >
         { /* Child components, such as markers, info windows, etc. */ }
       </GoogleMap>
