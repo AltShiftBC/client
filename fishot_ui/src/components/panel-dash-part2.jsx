@@ -2,6 +2,59 @@ import React from "react";
 import "../styles/panelDash.css"
 import { Icon } from "@iconify/react/dist/iconify.js";
 import map from "../assets/map.png"
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
+const Map = () => {
+    const { isLoaded, loadError } = useJsApiLoader({
+      id: 'google-map-script',
+      googleMapsApiKey: "AIzaSyC9DwiMV_Ilr99dLFNvqc1YVJSC8wW0Mpw"
+    });
+  
+    const [map, setMap] = useState(null);
+  
+    const mapContainerStyle = {
+      width: '100%',
+      height: '400px',
+    };
+  
+    const center = {
+        // Here we will get this coordinates from the user input i think
+      lat: -1.939826787816454,
+      lng: 30.0445426438232
+    };
+  
+    const onLoad = React.useCallback(function callback(map) {
+      console.log('Map has loaded successfully');
+      setMap(map);
+    }, []);
+  
+    const onUnmount = React.useCallback(function callback(map) {
+      console.log('Map has unmounted');
+      setMap(null);
+    }, []);
+  
+    useEffect(() => {
+      if (loadError) {
+        console.error("Error loading maps", loadError);
+      }
+    }, [loadError]);
+  
+    if (loadError) return <div>Error loading maps</div>;
+    if (!isLoaded) return <div>Loading maps</div>;
+  
+    return (
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        center={center}
+        zoom={10}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        id="map-map"
+      >
+        { /* Child components, such as markers, info windows, etc. */ }
+      </GoogleMap>
+    );
+  };
 
 const PanelDashPart2 = () => {
     const statusItems = [

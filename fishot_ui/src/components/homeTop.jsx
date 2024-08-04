@@ -6,8 +6,6 @@ import graph from "../assets/graph.png";
 import { Link } from "react-router-dom";
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-
-
 const Map = () => {
     const { isLoaded, loadError } = useJsApiLoader({
       id: 'google-map-script',
