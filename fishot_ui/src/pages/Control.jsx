@@ -1,13 +1,12 @@
 import React from "react";
-import "../styles/remote.css";
 import Sidebar from "../components/sidebar";
-import ControlDash from "../components/controlDash";
+import RemoteControl2 from "../components/RemoteControl2";
 
 const Control=()=>{
     return(
         <div>
-            <Sidebar />
-            <ControlDash />
+           <Sidebar/>
+           <RemoteControl2 />
         </div>
     )
 }
