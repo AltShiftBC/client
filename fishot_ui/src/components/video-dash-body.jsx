@@ -6,7 +6,6 @@ import feed2 from "../assets/icons/feed2.svg";
 import feed3 from "../assets/icons/feed3.svg";
 import feed4 from "../assets/icons/feed4.svg";
 import "../styles/video.css";
-// import { Icon } from "@iconify/react";
 
 const VideoDashBody = () => {
     const [isPlaying, setIsPlaying] = useState(false);
