@@ -11,6 +11,7 @@
     gap: 20px;
 
 }
+
 .emergency{
     display: flex;
     justify-content: space-between;
@@ -40,4 +41,14 @@
     font-weight: 600;
     font-size: small;
     border-radius: 0;
+}
+.detected-object-div{
+    width: 90px;
+    height: 90px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #4E60FF;
+    position: absolute;
+    top: 434px;
+    left: 434px;
 }

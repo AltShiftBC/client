@@ -171,49 +171,6 @@ const RemoteControl = () => {
                     <p>REC</p>
                     <div className="record-on"></div>
                 </div>
-                <div className="video-navigate">
-                    <div className="live-noti">
-                        <div className="live-on"></div>
-                        <p>Live</p>
-                    </div>
-                    <div className="control-icons">
-                        <Icon
-                            id="video-icon"
-                            icon="material-symbols:fast-rewind-outline"
-                            style={{ cursor: "pointer" }}
-                            onClick={handleRewind}
-                        />
-                        {isPlaying ? (
-                            <Icon
-                                id="video-icon"
-                                icon="zondicons:pause-outline"
-                                style={{ cursor: "pointer" }}
-                                onClick={handlePlayPause}
-                            />
-                        ) : (
-                            <Icon
-                                id="video-icon"
-                                icon="octicon:play-16"
-                                style={{ cursor: "pointer" }}
-                                onClick={handlePlayPause}
-                            />
-                        )}
-                        <Icon
-                            id="video-icon"
-                            icon="material-symbols:fast-forward-outline"
-                            style={{ cursor: "pointer" }}
-                            onClick={handleForward}
-                        />
-                    </div>
-                    <div className="download-icon">
-                        <Icon
-                            id="video-icon"
-                            icon="material-symbols:file-download"
-                            style={{ cursor: "pointer" }}
-                            onClick={handleDownload}
-                        />
-                    </div>
-                </div>
             </div>
             <div className="status-div">
                 {statusData.map((item, index) => (
@@ -237,6 +194,7 @@ const RemoteControl = () => {
                     <Icon id="icon" icon="twemoji:compass" style={{ cursor: "pointer" }} />
                 </div>
             </div>
+            <div className="detected-object-div"></div>
         </div>
     );
 };
