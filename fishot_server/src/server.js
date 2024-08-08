@@ -54,7 +54,11 @@ app.post('/api/videos/upload', upload.single('video'), async (req, res) => {
 
 sequelize.sync({ force: true })
   .then(() => {
+    console.log('------------------------------');
+    console.log('+                             +');
     console.log('Database & tables created!');
+    console.log('+                             +');
+    console.log('------------------------------');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch(err => console.log('Database Error:', err));
