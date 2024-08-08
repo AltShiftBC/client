@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../styles/panelDash.css"
 import { Icon } from "@iconify/react/dist/iconify.js";
 import map from "../assets/map.png"
@@ -19,7 +19,7 @@ const Map = () => {
   
     const center = {
         // Here we will get this coordinates from the user input i think
-      lat: -1.939826787816454,
+      lat: -1.939826787816455,
       lng: 30.0445426438232
     };
   
@@ -132,7 +132,7 @@ const PanelDashPart2 = () => {
                 <div className="pathway">
                     <div>
                         <p className="mode-name">Pathway</p>
-                        <img src={map} alt="" width={635} />
+                        <Map />
                         <div>
                             <div className="position-div">
                                 <p>Initial position:</p>

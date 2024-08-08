@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import video from "../assets/video-feed.png";
 import feed1 from "../assets/icons/feed1.svg";
 import feed2 from "../assets/icons/feed2.svg";
 import feed3 from "../assets/icons/feed3.svg";
 import feed4 from "../assets/icons/feed4.svg";
 import "../styles/video.css";
+import { Icon } from "@iconify/react";
+import axios from 'axios';
 
 const VideoDashBody = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -21,7 +22,7 @@ const VideoDashBody = () => {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 videoRef.current.srcObject = stream;
-                
+               
                 const recorder = new MediaRecorder(stream);
                 setMediaRecorder(recorder);
 
@@ -65,15 +66,36 @@ const VideoDashBody = () => {
         return () => clearInterval(interval);
     }, [isPlaying, recordingStartTime]);
 
-    const handlePlayPause = () => {
+    const handlePlayPause = async () => {
         if (isPlaying) {
             videoRef.current.pause();
-            if (mediaRecorder) mediaRecorder.stop();
+            if (mediaRecorder) {
+                mediaRecorder.stop();
+                await saveVideoToDatabase();
+            }
         } else {
             videoRef.current.play();
-            if (mediaRecorder) mediaRecorder.start();
+            if (mediaRecorder) {
+                setRecordedChunks([]);
+                mediaRecorder.start();
+            }
         }
         setIsPlaying(!isPlaying);
+    };
+
+    const saveVideoToDatabase = async () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const formData = new FormData();
+        formData.append('video', blob, 'recorded_video.webm');
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/videos/upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+            console.log('Video saved:', response.data);
+        } catch (error) {
+            console.error('Error saving video:', error);
+        }
     };
 
     const handleRewind = () => {
@@ -84,48 +106,6 @@ const VideoDashBody = () => {
     const handleForward = () => {
         videoRef.current.currentTime += 10;
         setCurrentTime(videoRef.current.currentTime);
-    };
-
-    const trimVideo = (chunks, trimTime) => {
-        return new Promise((resolve, reject) => {
-            const blob = new Blob(chunks, { type: 'video/webm' });
-            const url = URL.createObjectURL(blob);
-            const videoElement = document.createElement('video');
-            videoElement.src = url;
-            videoElement.preload = 'metadata';
-            videoElement.onloadedmetadata = () => {
-                const duration = videoElement.duration;
-                const startTime = 0;
-                const endTime = Math.min(trimTime, duration);
-
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                const stream = canvas.captureStream();
-                const recorder = new MediaRecorder(stream);
-
-                const trimmedChunks = [];
-                recorder.ondataavailable = event => {
-                    if (event.data.size > 0) {
-                        trimmedChunks.push(event.data);
-                    }
-                };
-
-                recorder.start();
-                videoElement.currentTime = startTime;
-
-                videoElement.ontimeupdate = () => {
-                    if (videoElement.currentTime >= endTime) {
-                        videoElement.pause();
-                        recorder.stop();
-                    }
-                    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-                };
-            };
-
-            videoElement.onerror = (error) => {
-                reject(error);
-            };
-        });
     };
 
     const handleDownload = () => {
@@ -153,10 +133,10 @@ const VideoDashBody = () => {
     return (
         <div className="video-dash">
             <div className="video-control">
-                <video 
-                    ref={videoRef} 
-                    width="900" 
-                    autoPlay 
+                <video
+                    ref={videoRef}
+                    width="900"
+                    autoPlay
                     onTimeUpdate={() => setCurrentTime(videoRef.current.currentTime)}
                 />
                 <div>
@@ -175,40 +155,40 @@ const VideoDashBody = () => {
                         <p>Live</p>
                     </div>
                     <div className="control-icons">
-                        <Icon 
-                            id="video-icon" 
-                            icon="material-symbols:fast-rewind-outline" 
-                            style={{ cursor: "pointer" }} 
-                            onClick={handleRewind} 
+                        <Icon
+                            id="video-icon"
+                            icon="material-symbols:fast-rewind-outline"
+                            style={{ cursor: "pointer" }}
+                            onClick={handleRewind}
                         />
                         {isPlaying ? (
-                            <Icon 
-                                id="video-icon" 
-                                icon="zondicons:pause-outline" 
-                                style={{ cursor: "pointer" }} 
-                                onClick={handlePlayPause} 
+                            <Icon
+                                id="video-icon"
+                                icon="zondicons:pause-outline"
+                                style={{ cursor: "pointer" }}
+                                onClick={handlePlayPause}
                             />
                         ) : (
-                            <Icon 
-                                id="video-icon" 
-                                icon="octicon:play-16" 
-                                style={{ cursor: "pointer" }} 
-                                onClick={handlePlayPause} 
+                            <Icon
+                                id="video-icon"
+                                icon="octicon:play-16"
+                                style={{ cursor: "pointer" }}
+                                onClick={handlePlayPause}
                             />
                         )}
-                        <Icon 
-                            id="video-icon" 
-                            icon="material-symbols:fast-forward-outline" 
-                            style={{ cursor: "pointer" }} 
-                            onClick={handleForward} 
+                        <Icon
+                            id="video-icon"
+                            icon="material-symbols:fast-forward-outline"
+                            style={{ cursor: "pointer" }}
+                            onClick={handleForward}
                         />
                     </div>
                     <div className="download-icon">
-                        <Icon 
-                            id="video-icon" 
-                            icon="material-symbols:file-download" 
-                            style={{ cursor: "pointer" }} 
-                            onClick={handleDownload} 
+                        <Icon
+                            id="video-icon"
+                            icon="material-symbols:file-download"
+                            style={{ cursor: "pointer" }}
+                            onClick={handleDownload}
                         />
                     </div>
                 </div>
