@@ -15,10 +15,10 @@ const Login=()=>{
                             <div className="input-containers">
                                 
                                 <div className="lemails">
-                                    <div className="lem"><input type="email" placeholder="Email" id="lem"/></div>
+                                    <div className="lem"><input type="email" name="lemails" placeholder="Email" id="lem"/></div>
                                 </div>
                                 <div className="lpasswords">
-                                    <div className="lpwd"><input type="password" placeholder="Password" id="lpwd"/></div>
+                                    <div className="lpwd"><input type="password" name="lpasswords" placeholder="Password" id="lpwd"/></div>
                                     <Link className="forgot-password" to="/forgot" style={{textDecoration:"none", fontSize:"13px"}}>Forgot password</Link>
                                 </div>
                                 <div className="lunique-id">

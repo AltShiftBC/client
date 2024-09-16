@@ -14,16 +14,16 @@ const Register = () => {
                 <div className="input">
                     <div className="input-containers">
                         <div className="names">
-                            <div className="fname"><input type="text" placeholder="Firstname" id="fname"/></div>
-                            <div className="lname"><input type="text" placeholder="Lastname" id="lname"/></div>
+                            <div className="fname"><input type="text" name="firstname" placeholder="Firstname" id="fname"/></div>
+                            <div className="lname"><input type="text" name="lastname" placeholder="Lastname" id="lname"/></div>
                         </div>
                         <div className="emails">
-                            <div className="em"><input type="email" placeholder="Email" id="em"/></div>
-                            <div className="re-em"><input type="email" placeholder="Re-write email" id="re-em"/></div>
+                            <div className="em"><input type="email" name="email" placeholder="Email" id="em"/></div>
+                            <div className="re-em"><input type="email" name="re-email" placeholder="Re-write email" id="re-em"/></div>
                         </div>
                         <div className="passwords">
-                            <div className="pwd"><input type="password" placeholder="Password" id="pwd"/></div>
-                            <div className="re-pwd"><input type="password" placeholder="Confirm password" id="re-pwd"/></div>
+                            <div className="pwd"><input type="password" name="password" placeholder="Password" id="pwd"/></div>
+                            <div className="re-pwd"><input type="password" name="re-password" placeholder="Confirm password" id="re-pwd"/></div>
                         </div>
                     </div>
                     <div className="input-other-methods">

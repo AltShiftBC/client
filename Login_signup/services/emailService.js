@@ -16,7 +16,7 @@ exports.sendUniqueId = (email, uniqueId) => {
             if (error) {
                 console.log('Error sending email:', error);
                 reject(error);
-            } else {
+            } else {a
                 console.log('Email sent:', info.response);
                 resolve(info);
             }
