@@ -1,62 +1,100 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/panelDash.css"
 import { Icon } from "@iconify/react/dist/iconify.js";
-import map from "../assets/map.png"
+
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const Map = () => {
     const { isLoaded, loadError } = useJsApiLoader({
-      id: 'google-map-script',
-      googleMapsApiKey: "AIzaSyC9DwiMV_Ilr99dLFNvqc1YVJSC8wW0Mpw"
+        id: 'google-map-script',
+        googleMapsApiKey: "AIzaSyC9DwiMV_Ilr99dLFNvqc1YVJSC8wW0Mpw"
     });
-  
+
     const [map, setMap] = useState(null);
-  
+
     const mapContainerStyle = {
-      width: '100%',
-      height: '400px',
+        width: '100%',
+        height: '400px',
     };
-  
+
     const center = {
         // Here we will get this coordinates from the user input i think
-      lat: -1.939826787816455,
-      lng: 30.0445426438232
+        lat: -1.939826787816455,
+        lng: 30.0445426438232
     };
-  
+
     const onLoad = React.useCallback(function callback(map) {
-      console.log('Map has loaded successfully');
-      setMap(map);
+        console.log('Map has loaded successfully');
+        setMap(map);
     }, []);
-  
+
     const onUnmount = React.useCallback(function callback(map) {
-      console.log('Map has unmounted');
-      setMap(null);
+        console.log('Map has unmounted');
+        setMap(null);
     }, []);
-  
+
     useEffect(() => {
-      if (loadError) {
-        console.error("Error loading maps", loadError);
-      }
+        if (loadError) {
+            console.error("Error loading maps", loadError);
+        }
     }, [loadError]);
-  
+
     if (loadError) return <div>Error loading maps</div>;
     if (!isLoaded) return <div>Loading maps</div>;
-  
+
     return (
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        id="map-map"
-      >
-        { /* Child components, such as markers, info windows, etc. */ }
-      </GoogleMap>
+        <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            center={center}
+            zoom={10}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            id="map-map"
+        >
+            { /* Child components, such as markers, info windows, etc. */}
+        </GoogleMap>
     );
-  };
+};
 
 const PanelDashPart2 = () => {
+    const [currentSpeed, setCurrentSpeed] = useState(0)
+    const [ellipseLeft, setEllipseLeft] = useState(0)
+    useEffect(() => {
+        const dashStatiLine = document.getElementById('dash-stati-line');
+        const dashStatiEllipse = document.getElementById('dash-stati-ellipse');
+        const currentSpeedElement = document.getElementById('current-speed');
+        const speedPoints = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+
+        const points = document.querySelectorAll('#dash-stati-scale span');
+        points.forEach((point) => {
+            point.addEventListener('click', (e) => {
+                const pointRect = point.getBoundingClientRect();
+                const ellipseLeft = pointRect.left - dashStatiLine.getBoundingClientRect().left + (point.offsetWidth / 2) - (dashStatiEllipse.offsetWidth / 2);
+                setEllipseLeft(ellipseLeft);
+                const pointIndex = parseInt(point.id.replace('point-', ''));
+                updateSpeed(speedPoints[pointIndex / 10]);
+            });
+        });
+
+        dashStatiEllipse.addEventListener('mousedown', (e) => {
+            document.addEventListener('mousemove', (e) => {
+                const rect = dashStatiEllipse.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                setEllipseLeft(x);
+                const pointIndex = Math.round(x / (dashStatiLine.offsetWidth / 10));
+                updateSpeed(speedPoints[pointIndex]);
+            });
+            document.addEventListener('mouseup', () => {
+                document.removeEventListener('mousemove', null, false);
+            });
+        });
+
+        function updateSpeed(speed) {
+            setCurrentSpeed(speed);
+            currentSpeedElement.textContent = `${speed} Km/h`;
+        }
+    }, []);
+
     const statusItems = [
         {
             icon: 'gg:battery',
@@ -101,6 +139,7 @@ const PanelDashPart2 = () => {
             value: 'Ok',
         },
     ];
+
     return (
         <div className="dash-part2-div">
             <div className="part2-side-one">
@@ -114,20 +153,34 @@ const PanelDashPart2 = () => {
                 <div className="panel-speed">
                     <div>
                         <p className="mode-name">Speed</p>
-                        <div className="mode-mode"><Icon style={{ fontSize: "25px" }} icon="material-symbols:speed-outline" /><p>34 Km/h</p></div>
+                        <div className="mode-mode"><Icon style={{ fontSize: "25px" }} icon="material-symbols:speed-outline" /><p id="current-speed">{currentSpeed} km/hr</p></div>
                     </div>
                     <div className="speed-panel">
                         <div style={{ fontSize: "smaller" }}>Set max speed</div>
                         <div className="dash-stati">
                             <Icon icon="bi:lightning-fill" style={{ color: "#4E60FF" }} />
-                            <div id="dash-stati-line"></div>
-                            <div id="dash-stati-ellipse"></div>
+                            <div id="dash-stati-line">
+                                <div id="dash-stati-scale">
+                                    <span id="point-0" style={{ fontSize: '12px', color: '#666' }}>0</span>
+                                    <span id="point-10" style={{ fontSize: '12px', color: '#666' }}>10</span>
+                                    <span id="point-20" style={{ fontSize: '12px', color: '#666' }}>20</span>
+                                    <span id="point-30" style={{ fontSize: '12px', color: '#666' }}>30</span>
+                                    <span id="point-40" style={{ fontSize: '12px', color: '#666' }}>40</span>
+                                    <span id="point-50" style={{ fontSize: '12px', color: '#666' }}>50</span>
+                                    <span id="point-60" style={{ fontSize: '12px', color: '#666' }}>60</span>
+                                    <span id="point-70" style={{ fontSize: '12px', color: '#666' }}>70</span>
+                                    <span id="point-80" style={{ fontSize: '12px', color: '#666' }}>80</span>
+                                    <span id="point-90" style={{ fontSize: '12px', color: '#666' }}>90</span>
+                                    <span id="point-100" style={{ fontSize: '12px', color: '#666' }}>100</span>
+                                </div>
+                            </div>
+                            <div id="dash-stati-ellipse"  style={{ transform: `translateX(${ellipseLeft}px)` }} ></div>
                         </div>
                         <div className="dash-speed">
-                            <p id="speed-init">00 km/h</p>
-                            <p id="speed-final">50 km/h</p>
+                            <p id="current-speed">{currentSpeed} km/h</p>
                         </div>
                     </div>
+
                 </div>
                 <div className="pathway">
                     <div>
@@ -197,9 +250,9 @@ const PanelDashPart2 = () => {
                 </div>
                 <div className="panel-emergencies">
                     <p id="head">Emergency</p>
-                    <div><Icon icon="bi:arrow-return-right" style={{fontWeight:"700", fontSize:"20px"}}/><p>Return</p></div>
-                    <div><Icon icon="ic:outline-eject" style={{fontWeight:"700", fontSize:"20px"}}/><p>Eject package</p></div>
-                    <div><Icon icon="fa6-solid:power-off" style={{fontWeight:"700", fontSize:"20px"}}/><p>Shutdown</p></div>
+                    <div><Icon icon="bi:arrow-return-right" style={{ fontWeight: "700", fontSize: "20px" }} /><p>Return</p></div>
+                    <div><Icon icon="ic:outline-eject" style={{ fontWeight: "700", fontSize: "20px" }} /><p>Eject package</p></div>
+                    <div><Icon icon="fa6-solid:power-off" style={{ fontWeight: "700", fontSize: "20px" }} /><p>Shutdown</p></div>
                 </div>
 
             </div>
