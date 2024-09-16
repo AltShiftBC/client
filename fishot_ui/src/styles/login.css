@@ -31,7 +31,7 @@
     gap: 10px;
     width: 100%;
 }
-.lemails, .lpasswords{
+.lemails, .lpasswords, .lunique-id{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,13 +44,13 @@
     display: flex;
     justify-content: center;
 }
-.lem, .lpwd {
+.lem, .lpwd, .lid {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-#lem, #lpwd{
+#lem, #lpwd, #lid{
     width: 90%;
     padding: 10px;
     border-radius: 5px;

@@ -21,6 +21,9 @@ const Login=()=>{
                                     <div className="lpwd"><input type="password" placeholder="Password" id="lpwd"/></div>
                                     <Link className="forgot-password" to="/forgot" style={{textDecoration:"none", fontSize:"13px"}}>Forgot password</Link>
                                 </div>
+                                <div className="lunique-id">
+                                    <div className="lid"><input type="text" placeholder="Unique id" id="lid"/></div>
+                                </div>
                             </div>
                             <div className="input-other-methods">
                                 <Link to="google.com" className="google"><Icon icon="devicon:google"fontSize={20}/></Link>
