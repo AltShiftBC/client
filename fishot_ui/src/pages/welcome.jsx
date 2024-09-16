@@ -10,7 +10,7 @@ const Welcome = () => {
                 <img src={logo} alt="" />
                 <div className="welcome-name">Fishot</div>
             </div>
-            <Link to="/home">
+            <Link to="/login">
             <button className="welcome-button">Continue</button>
             </Link>
         </div>

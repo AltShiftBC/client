@@ -1,0 +1,107 @@
+.register{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    width: 50%;
+    padding: 20px 0px;
+    gap: 20px;
+}
+.input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 90%;
+}
+
+.input-containers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+.names, .emails, .passwords{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+.fname, .lname, .em, .re-em, .pwd, .re-pwd {
+    width: 100%;
+}
+#fname, #lname, #em, #re-em, #pwd, #re-pwd{
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: #adb3e2;
+    border-width: 1px;
+    border-style: solid;
+}
+.input-other-methods{
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+}
+.google, .x, .linkedin{
+    background-color: #f1f2fa;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.google:hover, .x:hover, .linkedin:hover{
+    background-color: #b8bef0;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+.google:active, .x:active, .linkedin:active{
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+    transform: translateY(2px);
+}
+.privacy-policy{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submit{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#signup-button{
+    padding: 10px;
+    width: 40%;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #4E60FF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#signup-button:hover{
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+#signup-button:active{
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+    transform: translateY(2px);
+}

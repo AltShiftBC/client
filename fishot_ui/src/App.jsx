@@ -11,6 +11,8 @@ import Logout from './pages/Logout'
 import Panel from './pages/Panel'
 import Settings from './pages/Settings'
 import Video from './pages/Video'
+import Forgot from './pages/Forget'
+import Reset from './pages/Reset'
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -31,6 +33,8 @@ function App() {
         <Route path='/control' element={<Control />} />
         <Route path='/analytics' element={<Analytics />} />
         <Route path='/settings' element={<Settings />} />
+        <Route path='/forgot' element={<Forgot />} />
+        <Route path='/reset' element={<Reset />} />
       </Routes>
     </BrowserRouter>
 
