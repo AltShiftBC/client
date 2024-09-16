@@ -95,9 +95,14 @@ const HomeTop = () => {
                             Welcome back!</p>
                     </div>
                     <div className="profile-set">
-                     <Link to="/settings"><Icon icon="material-symbols:manage-accounts-outline" style={{cursor:"pointer"}}/></Link>
-                        <Link to="/logout"><Icon icon="material-symbols:logout" style={{cursor:"pointer"}}/></Link>
-                    </div>
+  <Link to="/settings"><Icon icon="material-symbols:manage-accounts-outline" style={{cursor:"pointer"}}/></Link>
+  <a id="log_out" onClick={(e) => {
+    if (window.confirm("Are you sure you want to exit?")) {
+      window.location.href = "/login";
+    } else {
+    }
+  }}><Icon icon="material-symbols:logout" style={{cursor:"pointer"}}/></a>
+</div>
                 </div>
                 <div className="statistic-div">
                     <div className="statistic-name"><p style={{fontWeight:"bold"}}>Depth</p><p style={{color:"#9F9F9F"}}>Sea level</p></div>

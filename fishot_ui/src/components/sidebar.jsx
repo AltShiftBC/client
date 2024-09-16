@@ -95,6 +95,26 @@ const Sidebar = () => {
             <p>Settings</p>
           </div>
         </Link>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <div
+            id="logout"
+            style={
+              location.pathname === "/login"
+                ? { backgroundColor: "#4E60FF", color: "#E4E7FF" }
+                : {}
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              if (confirm("Are you sure you want to exit?")) {
+                // Redirect to login page
+                window.location.href = "/login";
+              }
+            }}
+          >
+            <Icon icon="basil:logout-solid" style={{ fontSize: "30px" }} />
+            <p>Logout</p>
+          </div>
+        </Link>
       </div>
       <div className="below"></div>
     </div>
