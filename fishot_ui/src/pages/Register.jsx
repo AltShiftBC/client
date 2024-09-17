@@ -63,9 +63,8 @@ const Register = () => {
                 <div className="input">
                     <div className="input-containers">
                         <div className="names">
-
-                            <div className="fname"><input type="text" name="firstname" placeholder="Firstname" id="fname"/></div>
-                            <div className="lname"><input type="text" name="lastname" placeholder="Lastname" id="lname"/></div>
+                            <div className="fname"><input type="text" placeholder="Firstname" id="fname" value={fname} onChange={(e) => setFname(e.target.value)} required /></div>
+                            <div className="lname"><input type="text" placeholder="Lastname" id="lname" value={lname} onChange={(e) => setLname(e.target.value)} required /></div>
                         </div>
                         <div className="emails">
                             <div className="em"><input type="email" placeholder="Email" id="em" value={email} onChange={(e) => setEmail(e.target.value)} required /></div>
