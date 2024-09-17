@@ -27,7 +27,7 @@
     align-items: start;
     gap: 10px;
 }
-#home, #control, #video, #remote, #analytics, #settings{
+#home, #control, #video, #remote, #analytics, #settings, #logout{
     display: flex;
     justify-content: start;
     align-items: center;
@@ -39,7 +39,7 @@
     font-weight: 400;
     color: #343434;
 }
-#home:hover, #control:hover, #video:hover, #remote:hover, #analytics:hover, #settings:hover{
+#home:hover, #control:hover, #video:hover, #remote:hover, #analytics:hover, #settings:hover, #logout:hover{
     background-color: #4E60FF4A;
     color: #4E60FF;
     font-weight: 500;
