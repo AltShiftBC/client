@@ -32,8 +32,8 @@ const Login = () => {
       setTimeout(() => {
         setShowNotification(false);
       }, 2000);
-    } else if (uniqueId.length !== 10) {
-      setNotification('Unique ID must be 10 characters long!');
+    } else if (uniqueId.length !== 8) {
+      setNotification('Unique ID must be 8 characters long!');
       setShowNotification(true);
       setTimeout(() => {
         setShowNotification(false);
