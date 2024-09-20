@@ -8,7 +8,7 @@ const sequelize = require('./src/config/database');
 const Video = require('./src/models/video');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4500;
 
 app.use(cors());
 app.use(express.json());
