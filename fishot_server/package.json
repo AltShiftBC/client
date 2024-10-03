@@ -1,8 +1,10 @@
 {
-<<<<<<< HEAD
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "nodemon sever.js"
   },
+
+
   "dependencies": {
     "axios": "^1.7.7",
     "bcrypt": "^5.1.0",
@@ -23,39 +25,13 @@
     "passport-google-oauth20": "^2.0.0",
     "sequelize": "^6.37.3"
   },
+
   "devDependencies": {
     "nodemon": "^3.1.4",
     "supertest": "^6.3.3"
   }
 }
-=======
 
-  "scripts": {
-    "dev": "nodemon server.js",
-    "start":"nodemon server.js"
-  },
 
-  "dependencies": {
 
-    "cors": "^2.8.5",
 
-    "dotenv": "^16.4.5",
-
-    "express": "^4.19.2",
-
-    "multer": "^1.4.5-lts.1",
-
-    "mysql2": "^3.11.0",
-
-    "sequelize": "^6.37.3"
-
-  },
-
-  "devDependencies": {
-
-    "nodemon": "^3.1.4"
-
-  }
-}
-
->>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431

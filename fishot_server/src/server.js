@@ -1,4 +1,3 @@
-
 const express = require('express')
 const multer = require('multer')
 const fs = require('fs')
@@ -15,18 +14,18 @@ const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 app.use(cors({
   credentials: true,
   methods: ['POST','GET'],
-  origin: 'http://localhost:5173'
+  origin: process.env.CORS_ORIGIN
 }))
 
 app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use(cookieParser())
-app.use(expressSession({secret: '09abcf356-8886ac',saveUninitialized: true, resave: true}))
+app.use(expressSession({secret: process.env.SECRET, saveUninitialized: true, resave: true}))
 app.use(passport.initialize())
 app.use(passport.session())
 // require('./services/passportSevice')
@@ -34,19 +33,6 @@ app.use(Routes)
 
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
-
-const express = require('express');
-const cors = require('cors');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
-const sequelize = require('../src/config/database');
-const Video = require('../src/models/video');
-
-
-
-app.use(cors());
-app.use(express.json());
 
 
 
