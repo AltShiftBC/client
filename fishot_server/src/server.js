@@ -1,5 +1,4 @@
 
-<<<<<<< HEAD
 const express = require('express')
 const multer = require('multer')
 const fs = require('fs')
@@ -35,7 +34,7 @@ app.use(Routes)
 
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
-=======
+
 const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
@@ -44,15 +43,13 @@ const path = require('path');
 const sequelize = require('../src/config/database');
 const Video = require('../src/models/video');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+
 
 app.use(cors());
 app.use(express.json());
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
->>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
+
+
 
 const saveVideoToDatabase = async (fileName, filePath, videoData) => {
   try {
@@ -61,7 +58,6 @@ const saveVideoToDatabase = async (fileName, filePath, videoData) => {
       filepath: filePath,
       videoData: videoData,
       createdAt: new Date()
-<<<<<<< HEAD
     })
     console.log('Video metadata saved to database:', video.id)
     return video.id
@@ -122,45 +118,4 @@ sequelize.sync({ force: true })
     console.log('------------------------------')
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
   })
-  .catch(err => console.log('Database Error:', err))
-=======
-    });
-    console.log('Video metadata saved to database:', video.id);
-    return video.id;
-  } catch (error) {
-    console.error('Error saving video metadata to database:', error);
-    throw error;
-  }
-};
-
-app.post('/api/videos/upload', upload.single('video'), async (req, res) => {
-  const downloadsPath = path.join(process.env.USERPROFILE, 'Downloads');
-  const fileName = `recorded-video-${Date.now()}.webm`;
-  const filePath = path.join(downloadsPath, fileName);
-
-  fs.writeFile(filePath, req.file.buffer, async (err) => {
-    if (err) {
-      console.error('Error saving video:', err);
-      res.status(500).json({ error: 'Failed to save video' });
-    } else {
-      try {
-        const videoId = await saveVideoToDatabase(fileName, filePath, req.file.buffer);
-        res.status(201).json({ message: 'Video saved successfully', filePath: filePath, videoId: videoId });
-      } catch (dbError) {
-        res.status(500).json({ error: 'Failed to save video metadata to database' });
-      }
-    }
-  });
-});
-
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log('------------------------------');
-    console.log('+                             +');
-    console.log('Database & tables created!');
-    console.log('+                             +');
-    console.log('------------------------------');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  })
-  .catch(err => console.log('Database Error:', err));
->>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
+  
