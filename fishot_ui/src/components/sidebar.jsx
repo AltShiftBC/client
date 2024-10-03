@@ -1,12 +1,31 @@
-import React from "react";
-import "../styles/sidebar.css";
-import logo from "../assets/logo.png";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react"
+import "../styles/sidebar.css"
+import logo from "../assets/logo.png"
+import { Icon } from "@iconify/react/dist/iconify.js"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 const Sidebar = () => {
-  const location = useLocation();
-
+  const location = useLocation()
+  const [logged, setLoggedIn] = useState(false)
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    axios.defaults.withCredentials = true
+    axios
+      .get("http://localhost:3000/api/session")
+      .then((res) => {
+        if (res.data.status === true) {
+          setLoggedIn(true)
+        } else {
+          setLoggedIn(false)
+          navigate("/login")
+        }
+      })
+      .catch((err) => {
+        navigate("/login")
+      })
+  }, [logged])
   return (
     <div className="sidebar">
       <div className="one">
@@ -104,10 +123,10 @@ const Sidebar = () => {
                 : {}
             }
             onClick={(e) => {
-              e.preventDefault();
+              e.preventDefault()
               if (confirm("Are you sure you want to exit?")) {
                 // Redirect to login page
-                window.location.href = "/login";
+                window.location.href = "/login"
               }
             }}
           >
@@ -118,7 +137,7 @@ const Sidebar = () => {
       </div>
       <div className="below"></div>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

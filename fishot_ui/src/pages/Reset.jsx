@@ -12,7 +12,7 @@ const Reset = () => {
                 </Link>
                 <div className="input">
                     <div className="lemails" style={{fontSize:"18px", fontWeight:"bold"}}>
-                        The password reset link is sent to your email!
+                        Your new password sent to your email check it!
                     </div>
                     <div className="sign-in">Go to <Link to="/login" style={{textDecoration:"none", color:"#4E60FF", fontWeight:"500"}}>Login</Link></div>
                 </div>

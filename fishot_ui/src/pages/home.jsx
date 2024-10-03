@@ -4,6 +4,7 @@ import DashHome from "../components/dashHome";
 import "../styles/home.css"
 
 const Home =()=>{
+    
     return(
         <section className="home">
             <Sidebar/>

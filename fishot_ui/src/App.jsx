@@ -13,6 +13,9 @@ import Video from './pages/Video'
 import Forgot from './pages/Forget'
 import Reset from './pages/Reset'
 
+
+
+
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 

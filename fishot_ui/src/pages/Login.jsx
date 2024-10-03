@@ -1,54 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import logo from "../assets/logo.png"
 import "../styles/login.css"
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Icon } from "@iconify/react/dist/iconify.js"
+import { Link, useNavigate } from "react-router-dom"
+import axios from 'axios'
 
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [uniqueId, setUniqueId] = useState('');
-  const [notification, setNotification] = useState('');
-  const [showNotification, setShowNotification] = useState(false);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [uniqueId, setUniqueId] = useState('')
+  const navigate = useNavigate()
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  useEffect(()=> {
+    axios.defaults.withCredentials = true
+  },[])
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
     if (!email || !password || !uniqueId) {
-      setNotification('Please fill in all fields!');
-      setShowNotification(true);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
+      alert('Please fill in all fields!')
+      
     } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-      setNotification('Invalid email address!');
-      setShowNotification(true);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
+      alert('Invalid email address!')
+
     } else if (password.length < 8) {
-      setNotification('Password must be at least 8 characters long!');
-      setShowNotification(true);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
+      alert('Password must be at least 8 characters long!')
+
     } else if (uniqueId.length !== 8) {
-      setNotification('Unique ID must be 8 characters long!');
-      setShowNotification(true);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
+      alert('Unique ID must be 8 characters long!')
+      
     } else {
-      navigate('/home', { replace: true });
-      setNotification('Login successful!');
-      setShowNotification(true);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
+      const UserData = {
+        email: email,
+        password: password,
+        uniqueId: uniqueId
+      }
+
+      const {data: login} = await axios.post('http://localhost:3000/api/login',UserData)
+
+      if(login.status === true) {
+        alert(login.message)
+        setTimeout(()=> {
+          navigate('/home')
+        },1000)
+      }else {
+        alert(login.message)
+      }
+
     }
-  };
+  }
 
   return (
     <section className="register">
@@ -78,19 +79,9 @@ const Login = () => {
           <div className="login">Create a new account <Link to="/register">Sign up</Link> </div>
         </div>
       </div>
-      {showNotification && (
-        <div
-          className="notification"
-          style={{
-            backgroundColor: notification.includes("successful") ? "rgb(143, 245, 143)" : "rgb(247, 126, 126)",
-            animation: showNotification ? 'slideDown 0.5s forwards' : 'slideUp 0.5s forwards',
-          }}
-        >
-          {notification}
-        </div>
-      )}
+      
     </section>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
