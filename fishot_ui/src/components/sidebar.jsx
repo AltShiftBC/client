@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useEffect, useState } from "react"
 import "../styles/sidebar.css"
 import logo from "../assets/logo.png"
@@ -27,17 +27,7 @@ const Sidebar = () => {
         navigate("/login")
       })
   }, [logged])
-=======
-import React from "react";
-import "../styles/sidebar.css";
-import logo from "../assets/logo.png";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Link, useLocation } from "react-router-dom";
 
-const Sidebar = () => {
-  const location = useLocation();
-
->>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
   return (
     <div className="sidebar">
       <div className="one">
@@ -135,17 +125,10 @@ const Sidebar = () => {
                 : {}
             }
             onClick={(e) => {
-<<<<<<< HEAD
               e.preventDefault()
               if (confirm("Are you sure you want to exit?")) {
                 // Redirect to login page
                 window.location.href = "/login"
-=======
-              e.preventDefault();
-              if (confirm("Are you sure you want to exit?")) {
-                // Redirect to login page
-                window.location.href = "/login";
->>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
               }
             }}
           >
@@ -156,14 +139,8 @@ const Sidebar = () => {
       </div>
       <div className="below"></div>
     </div>
-<<<<<<< HEAD
+
   )
 }
 
 export default Sidebar
-=======
-  );
-};
-
-export default Sidebar;
->>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431

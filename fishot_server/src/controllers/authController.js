@@ -114,16 +114,6 @@ exports.login = async (req, res) => {
   }
 }
 
-// exports.fresetPassword)= async (req, res) => {
-//   try {
-//     const { email } = req.body
-//     await authService.resetPassword)email)
-//     res.status(200).json({ message: 'Password reset link sent to your email' })
-//   } catch (error) {
-//     res.status(500).json({ error: error.message })
-//   }
-// }
-
 exports.forgotPassword= async (req, res) => {
   try {
     const { email } = req.body
@@ -163,29 +153,3 @@ exports.forgotPassword= async (req, res) => {
     })
   }
 }
-
-// exports.socialAuthCallback = async (req, res) => {
-//   try {
-//     const { provider, id, displayName, emails } = req.user
-//     const email = emails[0].value
-
-//     // Check if the user already exists
-//     let user = await authService.findUserByEmail(email)
-
-//     if (!user) {
-//       // Create a new user
-//       user = await authService.createSocialUser({
-//         provider,
-//         providerId: id,
-//         email,
-//         displayName
-//       })
-//     }
-
-//      // Generate and send a JWT token
-//      const token = authService.generateToken(user)
-//      res.status(200).json({ token })
-//    } catch (error) {
-//      res.status(500).json({ error: error.message })
-//    }
-//  }
