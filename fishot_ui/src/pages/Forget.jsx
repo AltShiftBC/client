@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react"
 import "../styles/forgot.css"
 import { Link, useNavigate } from "react-router-dom"
@@ -31,6 +32,14 @@ const Forgot = () => {
     }
     
 
+=======
+import React from "react";
+import "../styles/forgot.css";
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.png"
+
+const Forgot = () => {
+>>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
     return (
         <section className="forgot">
             <div className="form-forgot">
@@ -39,9 +48,15 @@ const Forgot = () => {
                 </Link>
                 <div className="input">
                     <div className="lemails">
+<<<<<<< HEAD
                         <div className="lem"><input type="email" onInput={(event) => setEmail(event.target.value)} placeholder="Email" id="lem" /></div>
                     </div>
                     <div className="submit"><button id="signup-button" onClick={SendRequest}>Submit</button></div>
+=======
+                        <div className="lem"><input type="email" placeholder="Email" id="lem" /></div>
+                    </div>
+                    <div className="submit"><Link to="/reset" id="signup-button">Submit</Link></div>
+>>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
                     <div className="sign-in">Remember password? <Link to="/login" style={{textDecoration:"none"}}>Login</Link></div>
                 </div>
             </div>
@@ -49,4 +64,8 @@ const Forgot = () => {
     )
 }
 
+<<<<<<< HEAD
 export default Forgot
+=======
+export default Forgot;
+>>>>>>> 9b60b4c62e8b066a7229c29a723cee81212f5431
